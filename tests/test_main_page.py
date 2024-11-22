@@ -1,17 +1,16 @@
-import allure
-from data import *
-from conftest import *
-from pages.main_page import MainPage
 import pytest
+import allure
+
+from data import *
+from pages.main_page import MainPage
+from locators.main_page_locators import MainPageLocators
 
 
-class TestQuestionsAnswers:
+class TestMainPage:
 
-    @classmethod
-    def setup_class(cls):
-        cls.driver = webdriver.Firefox()
-
-    @pytest.mark.parametrize('question_number, expected_answer', [
+    @allure.title('Тестирование получение ответов на вопросы о важном')
+    @allure.description('Тестирование получение ответов на вопросы о важном')
+    @pytest.mark.parametrize('num, expected_answer', [
         (0, Answers.Answer_0),
         (1, Answers.Answer_1),
         (2, Answers.Answer_2),
@@ -21,14 +20,20 @@ class TestQuestionsAnswers:
         (6, Answers.Answer_6),
         (7, Answers.Answer_7)
     ])
-    def test_get_answers_for_questions(self, question_number, expected_answer):
-        self.driver.get(URL.main_page_url)
-        main_page = MainPage(self.driver)
-        main_page.get_questions_list()
-        main_page.click_question(question_number)
-        actual_answer = main_page.get_answer_text(question_number)
-        assert actual_answer == expected_answer
+    def test_get_answers_for_questions(self, driver, num, expected_answer):
+        main_page = MainPage(driver)
+        main_page.cookies_accept()
+        main_page.click_to_questions(num)
+        assert main_page.get_answers(num) == expected_answer
 
-    @classmethod
-    def teardown_class(cls):
-        cls.driver.quit()
+    @allure.title('Тестирование  создания заказа')
+    @allure.description('Тестирование  создания заказа и перехода на главную страницу по кл клику на логотип Самоката')
+    @pytest.mark.parametrize('button_order_locator',
+                             [MainPageLocators.HEADER_ORDER_BUTTON, MainPageLocators.MAIN_BLOCK_ORDER_BUTTON])
+    def test_go_to_main_page_via_scooter_logo(self, driver, button_order_locator):
+        main_page = MainPage(driver)
+        main_page.cookies_accept()
+        main_page.create_order(button_order_locator)
+        actual_result = main_page.get_main_page_via_scooter_logo()
+        expected_result = 'Вопросы о важном'
+        assert actual_result == expected_result
