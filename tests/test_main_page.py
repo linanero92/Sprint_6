@@ -1,6 +1,5 @@
 import pytest
 import allure
-
 from data import *
 from pages.main_page import MainPage
 from locators.main_page_locators import MainPageLocators
