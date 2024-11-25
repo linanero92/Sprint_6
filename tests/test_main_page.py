@@ -7,8 +7,8 @@ from locators.main_page_locators import MainPageLocators
 
 class TestMainPage:
 
-    @allure.title('Тестирование получение ответов на вопросы о важном')
-    @allure.description('Тестирование получение ответов на вопросы о важном')
+    @allure.title('Тестирование получения ответов на вопросы о важном')
+    @allure.description('Тестирование получения ответов на вопросы о важном')
     @pytest.mark.parametrize('num, expected_answer', [
         (0, Answers.Answer_0),
         (1, Answers.Answer_1),
@@ -25,8 +25,8 @@ class TestMainPage:
         main_page.click_to_questions(num)
         assert main_page.get_answers(num) == expected_answer
 
-    @allure.title('Тестирование  создания заказа')
-    @allure.description('Тестирование  создания заказа и перехода на главную страницу по кл клику на логотип Самоката')
+    @allure.title('Тестирование создания заказа')
+    @allure.description('Тестирование создания заказа и перехода на главную страницу по клику на логотип Самоката')
     @pytest.mark.parametrize('button_order_locator',
                              [MainPageLocators.HEADER_ORDER_BUTTON, MainPageLocators.MAIN_BLOCK_ORDER_BUTTON])
     def test_go_to_main_page_via_scooter_logo(self, driver, button_order_locator):

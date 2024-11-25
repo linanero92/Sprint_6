@@ -25,7 +25,7 @@ class BasePage:
 
     @allure.step('Клик по элементу')
     def click_to_element(self, locator):
-        WebDriverWait(self.driver, 5).until(expected_conditions.element_to_be_clickable(locator))
+        WebDriverWait(self.driver, 7).until(expected_conditions.element_to_be_clickable(locator))
         self.driver.find_element(*locator).click()
 
     @allure.step('Добавление текста в элемент')

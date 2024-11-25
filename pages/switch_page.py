@@ -1,7 +1,7 @@
 import allure
+import urls
 from pages.base_page import BasePage
 from locators.switch_page_locators import SwitchPageLocators
-from data import *
 
 
 class SwitchPage(BasePage):
@@ -18,7 +18,7 @@ class SwitchPage(BasePage):
         self.wait_for_window_opened(2)
         new_window = self.driver.window_handles[-1]
         self.driver.switch_to.window(new_window)
-        self.get_url(URL.dzen_url)
+        self.get_url(urls.DZEN_PAGE_URL)
 
     @allure.step('Поиск кнопки "Найти" на странице "Дзен"')
     def get_find_button_on_dzen(self):

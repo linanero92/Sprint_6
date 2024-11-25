@@ -1,9 +1,3 @@
-class URL:
-
-    main_page_url = 'https://qa-scooter.praktikum-services.ru/'
-    dzen_url = 'https://dzen.ru/?yredirect=true'
-
-
 class Answers:
 
     Answer_0 = 'Сутки — 400 рублей. Оплата курьеру — наличными или картой.'
